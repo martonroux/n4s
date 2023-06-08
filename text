@@ -1,0 +1,20 @@
+void set_direction(n4s_t *n4s, float direction)
+{
+    if (direction == n4s->direction) {
+        fprintf(stderr,"skip\n");
+        return;
+    }
+    if (n4s->direction == 0) {
+        n4s->direction = direction;
+        fprintf(stderr, "WHEELS_DIR:%f\n", direction);
+        printf("WHEELS_DIR:%f\n", direction);
+        n4s->direction = direction;
+        return;
+    }
+    if (n4s->direction > 0 && direction < 0 ||
+        n4s->direction < 0 && direction > 0) {
+        fprintf(stderr, "WHEELS_DIR:%f\n", direction - n4s->direction);
+        printf("WHEELS_DIR:%f\n", direction - n4s->direction);
+        n4s->direction = direction;
+    }
+}
